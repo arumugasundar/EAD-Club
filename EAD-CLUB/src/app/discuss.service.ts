@@ -7,8 +7,9 @@ import {Iarticle} from "./article";
   providedIn: 'root'
 })
 export class DiscussService {
-
   constructor( private http : HttpClient ) { }
+
+
   private _discussAdd = "http://localhost:3000/api/discuss/discuss"
   private _discussedFetch = "http://localhost:3000/api/discuss/discussed"
   private _upvoteInc = "http://localhost:3000/api/discuss/upvoteIncrement"

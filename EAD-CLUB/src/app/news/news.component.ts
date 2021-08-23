@@ -9,6 +9,8 @@ import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.css']
 })
+
+
 export class NewsComponent implements OnInit {
 
   constructor(private _service: NewsService, private _router: Router,public sanitizer: DomSanitizer) {
