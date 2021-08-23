@@ -1,0 +1,58 @@
+.outer{
+  background: url('../../../assets/images/create-author/createAuthor-background.jpg')  no-repeat center center fixed;
+  /*height: 70vh;*/
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+mat-card {
+  margin: auto;
+  width: 600px;
+  background-color:white;
+  opacity: 0.95;
+}
+mat-form-field {
+  width: 100%;
+  background-color: transparent;
+}
+
+.wrapper{
+  height: 200px;
+  width: 200px;
+  position: relative;
+  border: 3px solid #01ffd3;
+  border-radius: 50%;
+  background: url("../../../assets/images/profile/profile-img1.png");
+  background-size: 100% 100%;
+  margin: 70px auto;
+  overflow: hidden;
+}
+.myFile{
+  position: absolute;
+  bottom: 0;
+  outline: none;
+  color: transparent;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px 80px;
+  cursor: pointer;
+  transition: 0.5s;
+  background: rgba(0,0,0,0.5);
+  opacity: 0;
+}
+.myFile::-webkit-file-upload-button{
+  visibility: hidden;
+}
+.myFile::before{
+  content: '\f030';
+  font-family: FontAwesome;
+  font-size: 35px;
+  color: #fff;
+  display: inline-block;
+  -webkit-user-select: none;
+}
+.myFile:hover{
+  opacity: 1;
+}

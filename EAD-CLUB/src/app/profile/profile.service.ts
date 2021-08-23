@@ -1,23 +1,47 @@
 import { Injectable} from "@angular/core";
-import { Observable, throwError } from "rxjs";
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams, HttpRequest } from "@angular/common/http";
-import { catchError } from "rxjs/operators";
-import { ProfileDetail } from "./profile.model"
+import { Router } from '@angular/router';
+import {FormControl} from "@angular/forms";
 
-const apiUrl = 'http://localhost:3000/profile'
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
-  constructor(private http: HttpClient) { }
 
-  private handleError(error: HttpErrorResponse): any{
-    if(error.error instanceof ErrorEvent)
-      console.error('An error occurred :', error.error.message);
-    else
-      console.error(`Backend returned code ${error.status},` + `body was: ${error.error}`);
-    return throwError('Something bad happened; please try again later.');
+  constructor(private http: HttpClient,private router:Router) { }
+
+  getProfile(email: any){
+    return this.http.get<
+      {
+        id: number,
+        name: string,
+        email: string,
+        image: any,
+        imageType: string,
+        dob: string,
+        gender: string,
+        country: string,
+        interests: string,
+        subscribe: boolean
+      }>('http://localhost:3000/api/data/getProfile/' + email);
   }
 
+  updateProfile(name: string,email: string,dob: Date,image: File,gender: string,country: string,interests: string,subscribe: string) {
+    console.log('In services',image);
+    const record = new FormData();
+    record.append('name',name);
+    record.append('email',email);
+    record.append('dob',dob.toString());
+    if(image!=null)
+      record.append('image',image,name);
+    record.append('gender',gender);
+    record.append('country',country);
+    record.append('interests',interests);
+    record.append('subscribe',subscribe);
+    return this.http.post('http://localhost:3000/api/data/setProfile', record);
+  }
 
+  deleteProfile(email: any){
+    return this.http.get('http://localhost:3000/api/data/deleteAccount/' + email);
+  }
 }

@@ -1,0 +1,8 @@
+.outer{
+  background: url('../../assets/images/admin/admin-background.jpg')  no-repeat center center fixed;
+  /*height: 70vh;*/
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}

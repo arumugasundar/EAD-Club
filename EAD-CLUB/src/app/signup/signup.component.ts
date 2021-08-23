@@ -43,23 +43,25 @@ export class SignupComponent implements OnInit {
         this.openSnackBar("Invalid Credentials!!!", "Ok");
       else if (this.signUpFormGroup.value.password != this.signUpFormGroup.value.confirmPassword)
         this.openSnackBar("Password Mismatched!!!", "Ok");
-      else
+      else {
+        let email = this.signUpFormGroup.value.email;
         this.service.addDetails(
           this.signUpFormGroup.value.name,
           this.signUpFormGroup.value.email,
           this.signUpFormGroup.value.password
         ).subscribe((response) => {
-            console.log(response.message);
-            localStorage.setItem( 'token' , response.token )
+            localStorage.setItem('token', response.token)
+            localStorage.setItem('email',email)
             this._router.navigate(['/news']).then(() => {
               console.log("Navigated to News Page!")
             });
-          },(err: any) => {
-            if( err instanceof HttpErrorResponse )
-              if( err.status === 401 )
+          }, (err: any) => {
+            if (err instanceof HttpErrorResponse)
+              if (err.status === 401)
                 this.openSnackBar("Email Id Already Registered!!!", "Ok");
           }
         );
+      }
   }
 
   ngOnInit() {

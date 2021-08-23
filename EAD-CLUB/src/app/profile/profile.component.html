@@ -1,121 +1,81 @@
-<p>profile works!</p>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css">
-<style>
-  .wrapper{
-    height: 200px;
-    width: 200px;
-    position: relative;
-    border: 3px solid #01ffd3;
-    border-radius: 50%;
-    background: url("../../assets/images/profile/profile-img1.png");
-    background-size: 100% 100%;
-    margin: 70px auto;
-    overflow: hidden;
-  }
-  .myFile{
-    position: absolute;
-    bottom: 0;
-    outline: none;
-    color: transparent;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 15px 80px;
-    cursor: pointer;
-    transition: 0.5s;
-    background: rgba(0,0,0,0.5);
-    opacity: 0;
-  }
-  .myFile::-webkit-file-upload-button{
-    visibility: hidden;
-  }
-  .myFile::before{
-    content: '\f030';
-    font-family: FontAwesome;
-    font-size: 35px;
-    color: #fff;
-    display: inline-block;
-    -webkit-user-select: none;
-  }
-  /*.myFile::after{
-    content: 'Update';
-    font-family: 'Arial';
-    font-weight: bold;
-    color: #fff;
-    display: block;
-    top: 70px;
-    font-size: 14px;
-    position: absolute;
-  }*/
-  .myFile:hover{
-    opacity: 1;
-  }
 
-  /*.profile-card{
-    margin: auto;
-    display: table;
-    background: #fff;
-    padding: 30px 50px;
-    box-shadow: 0px 0px 5px #ddd;
-  }
-  .profile-image{
-    width: 150px;
-    height: 150px;
-    background: #fff;
-    border-radius: 50%;
-    overflow: hidden;
-  }
-
-  .profile-image img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .custom-file input[type='file']{
-    display: none;
-    align-items: center;
-    border: solid yellow 2px;
-  }
-
-  .custom-file label{
-    cursor: pointer;
-    color: #000;
-    text-align: center;
-    margin: 15px auto auto;
-  }*/
-</style>
-<div class="container-fluid container-xxl d-flex justify-content-center" style="border: solid yellow 2px">
-  <form [formGroup]="profileFormGroup">
+<div class="container-fluid container-xxl d-flex justify-content-center">
+  <form [formGroup]="profileFormGroup" class="formView" (submit)="onSaveChanges()">
     <div class="wrapper" id="wrapper">
       <div *ngIf="profileFormGroup.get('image').valid">
         <img [src]="imageUrl" alt="">
       </div>
-      <input type="file" class="myFile" (change)="onImageChange($event)" formControlName="image">
+      <input
+        type="file"
+        accept="image/*"
+        class="myFile"
+        (change)="onImageChange($event)"
+        formControlName="image"
+      >
     </div>
 
-    <!--<div class="profile-card">
-      <div class="profile-image">
-        <img src="../../assets/images/profile/profile-img1.png" id="upload-img">
-      </div>
-      <div class="custom-file">
-        <label for="profile">Upload Profile</label>
-        <input type="file" id="profile">
-      </div>
-    </div>-->
+   <!--<mat-form-field class="formFieldView">
+      <mat-label>Name</mat-label>
+      <input matInput type="text" formControlName="name">
+    </mat-form-field>
 
-    <input type="text" formControlName="name"><br>
-    <input type="email" formControlName="email"><br>
-    <input type="date" formControlName="dob"><br>
-    <input type="radio" formControlName="gender"><br>
-    <input type="select" formControlName="country"><br>
-    <input type="checkbox" formControlName="interests"><br>
-    <input type="radio" formControlName="subscribe"><br>
-    <button type="submit">Save Changes</button>
+    <mat-form-field class="formFieldView">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email">
+    </mat-form-field>-->
+    <input type="hidden" formControlName="name">
+    <input type="hidden" formControlName="email">
+
+    <mat-form-field class="formFieldView">
+      <mat-label>Date Of Birth</mat-label>
+      <input matInput formControlName="dob" [matDatepicker]="datepicker" disabled>
+      <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+      <mat-datepicker #datepicker disabled="false"></mat-datepicker>
+    </mat-form-field>
+
+    <br><span>Gender</span><br><br>
+    <mat-radio-group formControlName="gender" aria-label="Select an option">
+      <mat-radio-button value="male">Male</mat-radio-button>&nbsp;&nbsp;&nbsp;
+      <mat-radio-button value="female">Female</mat-radio-button>&nbsp;&nbsp;&nbsp;
+      <mat-radio-button value="others">Others</mat-radio-button>&nbsp;&nbsp;&nbsp;
+      <mat-radio-button value="not interested to answer">Not interested to Answer</mat-radio-button>
+    </mat-radio-group>
+
+    <br><br>
+    <mat-form-field class="formFieldView">
+      <mat-label>Country</mat-label>
+      <input type="text"
+             placeholder="Pick one"
+             aria-label="Number"
+             matInput
+             formControlName="country"
+             [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field class="formFieldView">
+      <mat-label>Interests</mat-label>
+      <textarea matInput formControlName="interests" placeholder="Ex. I am interested about..."></textarea>
+    </mat-form-field>
+
+    <br><span>Subscribe to our Email Updates</span><br><br>
+    <mat-radio-group formControlName="subscribe" aria-label="Select an option">
+      <mat-radio-button value="true">Yes</mat-radio-button>&nbsp;&nbsp;
+      <mat-radio-button value="false">No</mat-radio-button><br><br>
+    </mat-radio-group>
+    <br>
+
+    <button type="submit" color="primary" mat-raised-button [disabled]="!profileFormGroup.dirty">Save Changes</button>
   </form>
 </div>
-<div class="container-fluid container-xxl d-flex justify-content-center" style="border: solid yellow 2px">
-  <button type="button">Delete Account</button>
+<hr>
+<div class="container-fluid container-xxl d-flex justify-content-center">
+  <button type="button" color="warn" mat-raised-button (click)="deleteAccount()">Delete Account</button>
 </div>
-
-<!--<link rel="script" src="https://code.jquery.com/jquery-latest.min.js">-->
+<br>
 

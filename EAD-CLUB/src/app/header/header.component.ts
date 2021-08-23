@@ -8,7 +8,7 @@ import {Service} from "../data.service";
 export class HeaderComponent implements OnInit {
 
   constructor(private _authService:Service ) { }
-
+  title = "SPORTIFY";
   ngOnInit(): void {
   }
 

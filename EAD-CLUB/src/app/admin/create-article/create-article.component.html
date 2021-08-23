@@ -1,0 +1,85 @@
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Squada+One&display=swap" rel="stylesheet">
+<div class="container-fluid container-xxl outer">
+  <br>
+  <div class="row gap-3">
+    <div class="col d-flex justify-content-center">
+      <mat-card>
+        <h1 style="text-align: center;font-family: 'Squada One', cursive;">NEW ARTICLE</h1>
+        <!-- Form Starts -->
+        <form [formGroup]="form" (submit)="CreateArticle()">
+
+          <!-- Image Preview Starts -->
+          <div class="wrapper" id="wrapper">
+            <div *ngIf="form.get('image').valid">
+              <img [src]="imageUrl" alt="" width="550px" height="300px">
+            </div>
+            <input
+              type="file"
+              accept="image/*"
+              class="myFile"
+              (change)="onImageChange($event)"
+              formControlName="image"
+            >
+          </div>
+          <!-- Image Preview Ends -->
+
+          <!-- Title Field Starts -->
+          <mat-form-field appearance="outline">
+            <mat-label>Title</mat-label>
+            <input matInput type="text" formControlName="title">
+          </mat-form-field>
+          <!-- Title Field Ends -->
+          <br>
+          <!-- Tag Field Starts -->
+          <mat-form-field  appearance="outline">
+            <mat-label>Tag</mat-label>
+            <mat-select formControlName="tag">
+              <mat-option value="Recent">Recent</mat-option>
+              <mat-option value="Team">Team</mat-option>
+              <mat-option value="Local">Local</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- Tag Field Ends -->
+          <br>
+          <!-- Author Field Starts -->
+          <mat-form-field  appearance="outline">
+            <mat-label>Author</mat-label>
+            <mat-select formControlName="author">
+              <mat-option value="1">1</mat-option>
+              <mat-option value="2">2</mat-option>
+              <mat-option value="3">3</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- Author Field Ends -->
+          <br>
+          <!-- Description Field Starts -->
+          <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea
+              matInput
+              formControlName="description"
+              placeholder="Describe about the Roles and Responsibilities...">
+        </textarea>
+          </mat-form-field>
+          <!-- Description Field Ends -->
+          <br>
+          <!-- Quote Field Starts -->
+          <mat-form-field appearance="outline">
+            <mat-label>Quote</mat-label>
+            <input matInput type="text" formControlName="quote">
+          </mat-form-field>
+          <!-- Quote Field Ends -->
+          <br>
+          <!-- Submit Button Starts-->
+          <button type = "submit" color = "primary" mat-raised-button> Create Article </button>
+          <!-- Submit Button Ends -->
+
+        </form>
+        <!-- Form Ends -->
+      </mat-card>
+    </div>
+  </div>
+  <br>
+</div>
+

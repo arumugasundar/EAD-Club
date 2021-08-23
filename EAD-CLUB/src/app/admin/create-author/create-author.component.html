@@ -1,0 +1,55 @@
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Squada+One&display=swap" rel="stylesheet">
+<div class="container-fluid container-xxl outer">
+  <br>
+  <div class="row gap-3">
+    <div class="col d-flex justify-content-center">
+      <mat-card>
+        <h1 style="text-align: center;font-family: 'Squada One', cursive;">NEW AUTHOR</h1>
+        <!-- Form Starts -->
+        <form [formGroup]="form" (submit)="CreateAuthor()">
+
+          <!-- Image Preview Starts -->
+          <div class="wrapper" id="wrapper">
+            <div *ngIf="form.get('image').valid">
+              <img [src]="imageUrl" alt="">
+            </div>
+            <input
+              type="file"
+              accept="image/*"
+              class="myFile"
+              (change)="onImageChange($event)"
+              formControlName="image"
+            >
+          </div>
+          <!-- Image Preview Ends -->
+
+          <!-- Name Field Starts -->
+          <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput type="text" formControlName="name">
+          </mat-form-field>
+          <!-- Name Field Ends -->
+          <br><br>
+          <!-- Description Field Starts -->
+          <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea
+              matInput
+              formControlName="description"
+              placeholder="Describe about the Roles and Responsibilities...">
+        </textarea>
+          </mat-form-field>
+          <!-- Description Field Ends -->
+          <br><br>
+          <!-- Submit Button Starts-->
+          <button type = "submit" color = "primary" mat-raised-button> Create Author </button>
+          <!-- Submit Button Ends -->
+
+        </form>
+        <!-- Form Ends -->
+      </mat-card>
+    </div>
+  </div>
+  <br>
+</div>

@@ -1,11 +1,12 @@
 export interface ProfileDetail{
-  id: string;
+  id: number;
   name: string;
   email: string;
-  imageUrl: string;
-  date_of_birth: Date;
+  image: any;
+  imageType: string;
+  dob: string;
   gender: string;
+  country: string;
   interests: string;
   subscribe: boolean;
-
 }

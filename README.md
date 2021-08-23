@@ -1,4 +1,4 @@
-# EAD-Club
+# SPORTIFY
 Semester 2 EAD Project
 Guide:Dr.Manavalan R
 
