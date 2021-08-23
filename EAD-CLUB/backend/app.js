@@ -48,5 +48,4 @@ app.use("/api/articles",articles);
 app.use("/api/news",newsRoutes);
 app.use("/api/admin",adminRoutes);
 app.use("/api/discuss",discussRoutes);
-
 module.exports = app;
