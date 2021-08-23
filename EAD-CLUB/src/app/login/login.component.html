@@ -1,33 +1,30 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Squada+One&display=swap" rel="stylesheet">
-
-<div class="container">
-  <br>
+<div class="container-fluid container-xxl outer d-flex justify-content-sm-end">
   <mat-card>
     <h1 style="text-align: center;font-family: 'Squada One', cursive;">LOG IN</h1>
     <!-- Form Starts -->
     <form (submit)="onLoggingIn(postForm)" #postForm="ngForm">
+
       <!-- Email Field Starts -->
       <mat-form-field appearance="fill">
         <mat-label>Email</mat-label>
-        <input          matInput          type = "email"     [(ngModel)] = "loginUserData.email"     name = "email"          ngModel          required          #email = "ngModel">
+        <input matInput type = "email" [(ngModel)] = "loginUserData.email" name = "email" ngModel required #email = "ngModel">
       </mat-form-field>
       <!-- Email Field Ends -->
 
       <!-- Password Field Starts -->
       <mat-form-field appearance="fill">
         <mat-label>Password</mat-label>
-        <input           matInput          type = "password"   [(ngModel)] = "loginUserData.password"       name = "password"          ngModel          required          #password = "ngModel">
+        <input matInput type = "password" [(ngModel)] = "loginUserData.password" name = "password" ngModel required #password = "ngModel">
       </mat-form-field>
       <!-- Password Field Ends -->
 
       <!-- Submit Button Starts-->
-      <button        type="submit"        color="primary"        mat-raised-button>
-        Log In
-      </button>
+      <button type = "submit" color = "primary" mat-raised-button> Log In </button>
       <!-- Submit Button Ends -->
+
     </form>
     <!-- Form Ends -->
-    <P> {{result}} </P>
   </mat-card>
 </div>

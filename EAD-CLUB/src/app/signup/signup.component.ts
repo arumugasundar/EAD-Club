@@ -11,15 +11,11 @@ import {HttpErrorResponse} from "@angular/common/http";
 })
 export class SignupComponent implements OnInit {
 
-  signUpFormGroup: FormGroup | undefined;
-  submitted = false;
-  hide = true;
+  signUpFormGroup: FormGroup | undefined; // Container to store actual form details
+  hide = true; //used to toggle between hide and visible in password field
 
   constructor(private formBuilder: FormBuilder,public service: Service,private _snackBar: MatSnackBar,private _router : Router) {
-    this.createForm();
-  }
-
-  createForm(){
+    /* To Instantiate the form with controls */
     this.signUpFormGroup = this.formBuilder.group({
       name: ['', [Validators.required,Validators.pattern("[A-Za-z ]{3,32}")]],
       email: ['', [Validators.required,Validators.email]],
@@ -28,42 +24,44 @@ export class SignupComponent implements OnInit {
     });
   }
 
-  get f() { // @ts-ignore
-    return this.signUpFormGroup.controls; }
+  /* To get values to frontend for validation purpose */
+  get f() {
+    if(this.signUpFormGroup!=null)
+      return this.signUpFormGroup.controls;
+    return;
+  }
 
+  /* To display alert messages */
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action);
   }
 
+  /* To check the form validity and call backend to store data */
   onSaveDetails(){
-    this.submitted = true;
-    if(this.signUpFormGroup != null) {
-      if (this.signUpFormGroup.invalid) {
-        return;
-      }
-      if (this.signUpFormGroup.value.password != this.signUpFormGroup.value.confirmPassword) {
+    if(this.signUpFormGroup != null)
+      if (this.signUpFormGroup.invalid)
+        this.openSnackBar("Invalid Credentials!!!", "Ok");
+      else if (this.signUpFormGroup.value.password != this.signUpFormGroup.value.confirmPassword)
         this.openSnackBar("Password Mismatched!!!", "Ok");
-        return;
-      }
-      this.service.addDetails(
-        this.signUpFormGroup.value.name,
-        this.signUpFormGroup.value.email,
-        this.signUpFormGroup.value.password
-      ).subscribe((response) => {
-        console.log(response.message);
-        localStorage.setItem( 'token' , response.token )
-        this._router.navigate(['/news']);
-      },(err: any) => {
-        if( err instanceof HttpErrorResponse ){
-          if( err.status === 401 )
-          {
-            alert(err)
+      else
+        this.service.addDetails(
+          this.signUpFormGroup.value.name,
+          this.signUpFormGroup.value.email,
+          this.signUpFormGroup.value.password
+        ).subscribe((response) => {
+            console.log(response.message);
+            localStorage.setItem( 'token' , response.token )
+            this._router.navigate(['/news']).then(() => {
+              console.log("Navigated to News Page!")
+            });
+          },(err: any) => {
+            if( err instanceof HttpErrorResponse )
+              if( err.status === 401 )
+                this.openSnackBar("Email Id Already Registered!!!", "Ok");
           }
-        }
-      }
-      );
-    }
+        );
   }
+
   ngOnInit() {
   }
 }

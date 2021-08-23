@@ -1,6 +1,6 @@
-.container {
+.outer{
   background: url('./images/Signup-BackgroundImage.jpg')  no-repeat center center fixed;
-  height: 85vh;
+  height: 70vh;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -14,14 +14,3 @@ mat-card {
 mat-form-field {
   width: 100%;
 }
-
-/*mat-spinner {
-  margin: auto;
-}
-.mat-stepper-vertical {
-  margin-top: 8px;
-}
-
-.mat-form-field {
-  margin-top: 16px;
-}*/

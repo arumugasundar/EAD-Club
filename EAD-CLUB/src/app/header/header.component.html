@@ -30,10 +30,17 @@
       <mat-icon class="icon"> account_circle </mat-icon>
       <span class="label" style="font-size:25px;"> SIGNUP </span>
     </a>
+
     <a mat-button
        routerLink="/signup" [routerLinkActive]="['active']" *ngIf="_authService.loggedIn()" (click)="_authService.logoutUser()">
       <mat-icon class="icon">account_circle</mat-icon>
-      <span class="label" style="font-size:25px;"> Logout </span>
+      <span class="label" style="font-size:25px;"> LOGOUT </span>
+    </a>
+
+    <a mat-button
+       routerLink="/profile" [routerLinkActive]="['active']" *ngIf="_authService.loggedIn()">
+      <mat-icon class="icon">person</mat-icon>
+      <span class="label" style="font-size:25px;"> PROFILE </span>
     </a>
   </mat-toolbar-row>
 
@@ -67,25 +74,33 @@
           </a>
         </button>
 
-        <button mat-menu-item>
+        <button mat-menu-item *ngIf="_authService.loggedIn()">
           <a mat-button
-             routerLink="/signup" [routerLinkActive]="['active']" *ngIf="_authService.loggedIn()" (click)="_authService.logoutUser()">
+             routerLink="/signup" [routerLinkActive]="['active']" (click)="_authService.logoutUser()">
             <mat-icon class="icon">account_circle</mat-icon>
-            <span class="label" style="font-size:25px;"> Logout </span>
+            <span class="label" style="font-size:25px;"> LOGOUT </span>
           </a>
         </button>
 
-        <button mat-menu-item>
+        <button mat-menu-item *ngIf="_authService.loggedIn()">
           <a mat-button
-             routerLink="/login" [routerLinkActive]="['active']" *ngIf="!_authService.loggedIn()">
+             routerLink="/profile" [routerLinkActive]="['active']">
+            <mat-icon class="icon">person</mat-icon>
+            <span class="label" style="font-size:25px;"> PROFILE </span>
+          </a>
+        </button>
+
+        <button mat-menu-item *ngIf="!_authService.loggedIn()">
+          <a mat-button
+             routerLink="/login" [routerLinkActive]="['active']">
             <mat-icon class="icon">input</mat-icon>
             <span class="label" style="font-size:25px;"> LOGIN </span>
           </a>
         </button>
 
-        <button mat-menu-item>
+        <button mat-menu-item *ngIf="!_authService.loggedIn()">
           <a mat-button
-             routerLink="/signup" [routerLinkActive]="['active']" *ngIf="!_authService.loggedIn()">
+             routerLink="/signup" [routerLinkActive]="['active']">
             <mat-icon class="icon">account_circle</mat-icon>
             <span class="label" style="font-size:25px;"> SIGNUP </span>
           </a>

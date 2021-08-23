@@ -1,37 +1,18 @@
-.container {
-  background: url('./images/Signup-BackgroundImage.jpg')  no-repeat center center fixed;
-  height: 85vh;
+.outer{
+  background: url('../../assets/images/signup/Signup-BackgroundImage.jpg')  no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
-
-/*mat-card {
-  margin: auto;
-  max-width: 400px;
-}
-mat-form-field {
-  width: 100%;
-}*/
-
-mat-spinner {
-  margin: auto;
-}
 mat-vertical-stepper {
   font-family: 'Squada One', cursive;
   background: transparent;
   color: white;
-  margin-top: 8px;
-}
-
-.mat-form-field {
-  margin-top: 16px;
 }
 
 mat-label,mat-error{
   color: yellow;
-  font-family: Arial;
   width: inherit;
   text-shadow: 1px 1px black;
 }
@@ -39,11 +20,6 @@ mat-label,mat-error{
 ::placeholder {
   color: grey;
   opacity: 1;
-}
-
-form{
-  /*width: 600px;*/
-  float: right;
 }
 
 .form-label{

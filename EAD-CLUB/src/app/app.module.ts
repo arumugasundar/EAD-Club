@@ -34,6 +34,7 @@ import {TokenInterceptorService} from "./token-interceptor.service";
 import {PartnersComponent} from "./partners/partners.component";
 import { CarouselComponent } from './carousel/carousel.component';
 import { ActivitiesComponent } from './activities/activities.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { ActivitiesComponent } from './activities/activities.component';
     ArticleComponent,
     PartnersComponent,
     CarouselComponent,
-    ActivitiesComponent
+    ActivitiesComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

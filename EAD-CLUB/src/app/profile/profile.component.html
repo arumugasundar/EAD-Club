@@ -1,0 +1,121 @@
+<p>profile works!</p>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css">
+<style>
+  .wrapper{
+    height: 200px;
+    width: 200px;
+    position: relative;
+    border: 3px solid #01ffd3;
+    border-radius: 50%;
+    background: url("../../assets/images/profile/profile-img1.png");
+    background-size: 100% 100%;
+    margin: 70px auto;
+    overflow: hidden;
+  }
+  .myFile{
+    position: absolute;
+    bottom: 0;
+    outline: none;
+    color: transparent;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px 80px;
+    cursor: pointer;
+    transition: 0.5s;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+  }
+  .myFile::-webkit-file-upload-button{
+    visibility: hidden;
+  }
+  .myFile::before{
+    content: '\f030';
+    font-family: FontAwesome;
+    font-size: 35px;
+    color: #fff;
+    display: inline-block;
+    -webkit-user-select: none;
+  }
+  /*.myFile::after{
+    content: 'Update';
+    font-family: 'Arial';
+    font-weight: bold;
+    color: #fff;
+    display: block;
+    top: 70px;
+    font-size: 14px;
+    position: absolute;
+  }*/
+  .myFile:hover{
+    opacity: 1;
+  }
+
+  /*.profile-card{
+    margin: auto;
+    display: table;
+    background: #fff;
+    padding: 30px 50px;
+    box-shadow: 0px 0px 5px #ddd;
+  }
+  .profile-image{
+    width: 150px;
+    height: 150px;
+    background: #fff;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .profile-image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .custom-file input[type='file']{
+    display: none;
+    align-items: center;
+    border: solid yellow 2px;
+  }
+
+  .custom-file label{
+    cursor: pointer;
+    color: #000;
+    text-align: center;
+    margin: 15px auto auto;
+  }*/
+</style>
+<div class="container-fluid container-xxl d-flex justify-content-center" style="border: solid yellow 2px">
+  <form [formGroup]="profileFormGroup">
+    <div class="wrapper" id="wrapper">
+      <div *ngIf="profileFormGroup.get('image').valid">
+        <img [src]="imageUrl" alt="">
+      </div>
+      <input type="file" class="myFile" (change)="onImageChange($event)" formControlName="image">
+    </div>
+
+    <!--<div class="profile-card">
+      <div class="profile-image">
+        <img src="../../assets/images/profile/profile-img1.png" id="upload-img">
+      </div>
+      <div class="custom-file">
+        <label for="profile">Upload Profile</label>
+        <input type="file" id="profile">
+      </div>
+    </div>-->
+
+    <input type="text" formControlName="name"><br>
+    <input type="email" formControlName="email"><br>
+    <input type="date" formControlName="dob"><br>
+    <input type="radio" formControlName="gender"><br>
+    <input type="select" formControlName="country"><br>
+    <input type="checkbox" formControlName="interests"><br>
+    <input type="radio" formControlName="subscribe"><br>
+    <button type="submit">Save Changes</button>
+  </form>
+</div>
+<div class="container-fluid container-xxl d-flex justify-content-center" style="border: solid yellow 2px">
+  <button type="button">Delete Account</button>
+</div>
+
+<!--<link rel="script" src="https://code.jquery.com/jquery-latest.min.js">-->
+

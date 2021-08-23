@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const dataRoutes = require('./routes/functions');
+const profileRoute = require('./routes/profile-functions')
 
 const app = express();
 
@@ -33,4 +34,5 @@ app.use((req,res,next) => {
 })
 
 app.use("/api/data",dataRoutes);
+app.use("/api/data",profileRoute);
 module.exports = app;
